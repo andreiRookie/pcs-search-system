@@ -1,9 +1,14 @@
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PageEntry implements Comparable<PageEntry> {
     private final String pdfName;
     private final int page;
     private final int count;
 
-    public PageEntry(String pdfName, int page, int count) {
+    public PageEntry(
+            @JsonProperty("pdfName") String pdfName,
+            @JsonProperty("page") int page,
+            @JsonProperty("count") int count) {
         this.pdfName = pdfName;
         this.page = page;
         this.count = count;
