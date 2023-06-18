@@ -12,7 +12,7 @@ import java.util.*;
 
 public class BooleanSearchEngine implements SearchEngine {
 
-    private Map<String, List<PageEntry>> wordPageEntries = new HashMap<>();
+    private final Map<String, List<PageEntry>> wordPageEntries = new HashMap<>();
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
 
@@ -46,7 +46,7 @@ public class BooleanSearchEngine implements SearchEngine {
 
     }
 
-    private List<File> getPdfFiles(File pdfsDir) throws IOException {
+    private List<File> getPdfFiles(File pdfsDir) {
         List<File> pdfFiles = new ArrayList<>();
 
         if (pdfsDir.exists() && pdfsDir.isDirectory()) {
@@ -56,6 +56,8 @@ public class BooleanSearchEngine implements SearchEngine {
                         pdfFiles.add(path.toFile());
                     }
                 }
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
         return pdfFiles;

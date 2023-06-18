@@ -20,7 +20,7 @@ public class TestClient {
              PrintWriter output = new PrintWriter(socket.getOutputStream(), true)
         ) {
 
-            var testWord = "бизнес";
+            var testWord = "проектами стартапы задач";
             var outputMsg = MAPPER.writeValueAsString(testWord);
             System.out.println(outputMsg);
 

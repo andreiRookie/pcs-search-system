@@ -10,6 +10,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BooleanSearchEngine engine = new BooleanSearchEngine(new File("pdfs"));
 
+        BooleanMultiSearchEngine multiEngine =
+                new BooleanMultiSearchEngine(new File("pdfs"), new File("stop-ru.txt"));
+
         ObjectMapper mapper = new ObjectMapper();
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
@@ -26,7 +29,8 @@ public class Main {
                     var word = mapper.readValue(inputMsg, new TypeReference<String>(){});
                     System.out.println("Request: " + word);
 
-                    var searchResult = engine.search(word);
+//                    var searchResult = engine.search(word);
+                    var searchResult = multiEngine.search(word);
                     var mappedSearchResult = mapper.writeValueAsString(searchResult);
                     output.println(mappedSearchResult);
                 }
