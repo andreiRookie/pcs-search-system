@@ -6,12 +6,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BooleanMultiSearchEngine implements MultiSearchEngine {
 
@@ -113,12 +113,11 @@ public class BooleanMultiSearchEngine implements MultiSearchEngine {
         List<File> pdfFiles = new ArrayList<>();
 
         if (pdfsDir.exists() && pdfsDir.isDirectory()) {
-            try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(pdfsDir.getAbsolutePath()))) {
-                for (Path path : dirStream) {
-                    if (!Files.isDirectory((path))) {
-                        pdfFiles.add(path.toFile());
-                    }
-                }
+            try (Stream<Path> dirStream = Files.list(Paths.get(pdfsDir.getAbsolutePath()))) {
+                dirStream
+                        .filter(path -> !Files.isDirectory((path)))
+                        .forEach(path -> pdfFiles.add(path.toFile()));
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
