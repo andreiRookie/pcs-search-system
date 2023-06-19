@@ -8,7 +8,7 @@ public class Main {
     private static final int PORT = 8989;
 
     public static void main(String[] args) throws Exception {
-        BooleanSearchEngine engine = new BooleanSearchEngine(new File("pdfs"));
+//        BooleanSearchEngine engine = new BooleanSearchEngine(new File("pdfs"));
 
         BooleanMultiSearchEngine multiEngine =
                 new BooleanMultiSearchEngine(new File("pdfs"), new File("stop-ru.txt"));

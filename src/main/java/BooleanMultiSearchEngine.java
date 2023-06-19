@@ -51,6 +51,10 @@ public class BooleanMultiSearchEngine implements MultiSearchEngine {
     public List<PageEntry> search(String text) {
         var words = text.split("\\P{IsAlphabetic}+");
 
+        if (words.length == 1) {
+            return wordPageEntries.getOrDefault(words[0], Collections.emptyList());
+        }
+
         List<List<PageEntry>> summaryList = new ArrayList<>();
         for (var word : words) {
             var list = wordPageEntries.getOrDefault(word, Collections.emptyList());
