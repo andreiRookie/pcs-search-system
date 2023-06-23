@@ -21,17 +21,16 @@ public class TestClient {
         ) {
 
             var testWord = "проектами стартапы задач";
-            var outputMsg = MAPPER.writeValueAsString(testWord);
-            System.out.println(outputMsg);
+            System.out.println(testWord);
 
-            output.println(outputMsg);
+            output.println(testWord);
 
             String response = input.readLine();
             System.out.println("Response:\n" + response);
 
             List<PageEntry> entryList = MAPPER.readValue(response, new TypeReference<>(){});
+            System.out.println("PageEntries:");
             entryList.forEach(System.out::println);
-
 
         } catch (IOException ex) {
             ex.printStackTrace();

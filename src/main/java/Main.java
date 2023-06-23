@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.*;
 import java.net.ServerSocket;
@@ -26,11 +25,10 @@ public class Main {
                 ) {
 
                     var inputMsg = input.readLine();
-                    var word = mapper.readValue(inputMsg, new TypeReference<String>(){});
-                    System.out.println("Request: " + word);
+                    System.out.println("Request: " + inputMsg);
 
-//                    var searchResult = engine.search(word);
-                    var searchResult = multiEngine.search(word);
+//                    var searchResult = engine.search(inputMsg);
+                    var searchResult = multiEngine.search(inputMsg);
                     var mappedSearchResult = mapper.writeValueAsString(searchResult);
                     output.println(mappedSearchResult);
                 }
