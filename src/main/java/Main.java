@@ -24,11 +24,11 @@ public class Main {
                      PrintWriter output = new PrintWriter(socket.getOutputStream(), true)
                 ) {
 
-                    var inputMsg = input.readLine();
-                    System.out.println("Request: " + inputMsg);
+                    var searchRequest = input.readLine().toLowerCase();
+                    System.out.println("Request: " + searchRequest);
 
-//                    var searchResult = engine.search(inputMsg);
-                    var searchResult = multiEngine.search(inputMsg);
+//                    var searchResult = engine.search(searchRequest);
+                    var searchResult = multiEngine.search(searchRequest);
                     var mappedSearchResult = mapper.writeValueAsString(searchResult);
                     output.println(mappedSearchResult);
                 }
